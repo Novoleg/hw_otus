@@ -12,7 +12,6 @@ import (
 var ErrInvalidString = errors.New("invalid string")
 
 func Unpack(inputString string) (string, error) {
-
 	var sb strings.Builder
 	regexpString := `^[0-9]|[0-9][0-9]+`
 	matched, _ := regexp.MatchString(regexpString, inputString)
@@ -22,7 +21,7 @@ func Unpack(inputString string) (string, error) {
 	if matched {
 		return "", ErrInvalidString
 	}
-	
+
 	for i, v := range stringSlice {
 		tmpRune := []rune(v)
 
@@ -33,9 +32,8 @@ func Unpack(inputString string) (string, error) {
 				tmpString := sb.String()
 				sb.Reset()
 				sb.WriteString(tmpString[:len(tmpString)-1])
-
 			} else {
-				newSubString := strings.Repeat((string(stringSlice[i-1])), intSubString-1)
+				newSubString := strings.Repeat(stringSlice[i-1], intSubString-1)
 				sb.WriteString(newSubString)
 			}
 		} else {
